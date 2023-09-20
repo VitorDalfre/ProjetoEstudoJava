@@ -13,11 +13,12 @@ public class MenuService {
     }
 
     private String mostraOpcoesEnum() {
-        return Escolha.NUMEROS_PARES.getId() + " - " + Escolha.NUMEROS_PARES.getDescricao() + "\n" +
-                Escolha.NUMEROS_IMPARES.getId() + " - " + Escolha.NUMEROS_IMPARES.getDescricao() + "\n" +
-                Escolha.MAIOR_NUMERO.getId() + " - " + Escolha.MAIOR_NUMERO.getDescricao() + "\n" +
-                Escolha.MENOR_NUMER0.getId() + " - " + Escolha.MENOR_NUMER0.getDescricao() + "\n" +
-                Escolha.FINALIZA_PROGRAMA.getId() + " - " + Escolha.FINALIZA_PROGRAMA.getDescricao() + "\n";
+        StringBuilder opcoes = new StringBuilder();
+
+        for (Escolha escolha : Escolha.values()) {
+            opcoes.append(escolha.getId()).append(" - ").append(escolha.getDescricao()).append("\n");
+        }
+        return opcoes.toString();
     }
 
     public void direcionarEscolha(Escolha opcaoEscolhida, ArrayList<Integer> listaDeNumeros) {

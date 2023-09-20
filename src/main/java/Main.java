@@ -1,8 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         MenuService menuService = new MenuService();
         ListaService listaService = new ListaService();
@@ -11,5 +12,4 @@ public class Main {
 
         menuService.menuDeEscolha(lista);
     }
-
 }

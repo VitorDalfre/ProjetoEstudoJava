@@ -1,3 +1,4 @@
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,6 +15,10 @@ public class ListaService {
             listaNumeros.add(numeroAleatorio);
         }
         return listaNumeros;
+    }
+
+    public void lerListaTXT(){
+        Path path;
     }
 
     public ArrayList<Integer> apenasNumerosParesDaLista(ArrayList<Integer> listaCompleta) {

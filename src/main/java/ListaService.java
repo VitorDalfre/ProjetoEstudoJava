@@ -1,7 +1,8 @@
-import java.nio.file.Path;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 
 public class ListaService {
@@ -17,8 +18,26 @@ public class ListaService {
         return listaNumeros;
     }
 
-    public void lerListaTXT(){
-        Path path;
+    public ArrayList<Integer> lerListaTXT(InputStreamReader caminhoArquivo) throws IOException {
+        BufferedReader lerLista = new BufferedReader(caminhoArquivo);
+        StringBuilder arquivoLido = new StringBuilder();
+        String linha;
+
+        while ((linha = lerLista.readLine()) != null) {
+            arquivoLido.append(linha);
+        }
+
+        String[] separandoString = arquivoLido.toString().split(",");
+        ArrayList<Integer> listaTXTFinal = new ArrayList<>();
+
+        for (String s : separandoString) {
+            s = s.trim();
+            if (!s.isEmpty()) {
+                Integer adicionaLista = Integer.valueOf(s);
+                listaTXTFinal.add(adicionaLista);
+            }
+        }
+        return listaTXTFinal;
     }
 
     public ArrayList<Integer> apenasNumerosParesDaLista(ArrayList<Integer> listaCompleta) {

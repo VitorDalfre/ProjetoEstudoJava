@@ -1,6 +1,4 @@
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MainListaVindaDeUmTXT {
@@ -14,7 +12,10 @@ public class MainListaVindaDeUmTXT {
         ArrayList<Integer> lista = service.lerListaTXT(caminho);
         System.out.println(lista);
 
-        menu.menuDeEscolha(lista);
+        //menu.menuDeEscolha(lista);
+
+        OutputStreamWriter caminhoParaEscrever = new OutputStreamWriter(new FileOutputStream("C:\\ProjetosEstudos\\VitaoLista\\Teste2.txt"));
+        service.escreverNoArquivoTXT(lista, caminhoParaEscrever);
     }
 
 }

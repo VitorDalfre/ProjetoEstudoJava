@@ -1,6 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,6 +37,19 @@ public class ListaService {
             }
         }
         return listaTXTFinal;
+    }
+
+    public void escreverNoArquivoTXT(ArrayList<Integer> lista, OutputStreamWriter caminhoArquivo) throws IOException {
+        BufferedWriter escreveNoArquivo = new BufferedWriter(caminhoArquivo);
+        StringBuilder criaConteudoTexto = new StringBuilder();
+        for (int i = 0; i < lista.size(); i++) {
+            criaConteudoTexto.append(lista.get(i));
+            if(i != lista.size() - 1){
+                criaConteudoTexto.append(",");
+            }
+        }
+        escreveNoArquivo.write(criaConteudoTexto.toString());
+        escreveNoArquivo.close();
     }
 
     public ArrayList<Integer> apenasNumerosParesDaLista(ArrayList<Integer> listaCompleta) {

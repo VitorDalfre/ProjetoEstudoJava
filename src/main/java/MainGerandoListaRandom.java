@@ -7,6 +7,7 @@ public class MainGerandoListaRandom {
 
         MenuService menuService = new MenuService();
         ListaService listaService = new ListaService();
+
         ArrayList<Integer> lista = listaService.geraListaDe30NumeroAleatorio();
         System.out.println(lista);
 

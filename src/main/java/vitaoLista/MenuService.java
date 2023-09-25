@@ -55,6 +55,7 @@ public class MenuService {
             default:
                 System.out.println("Escolha inválida!");
                 menuDeEscolha(listaDeNumeros);
+                break;
         }
 
     }

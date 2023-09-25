@@ -1,5 +1,6 @@
+package vitaoLista;
+
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,14 +27,17 @@ public class ListaService {
             arquivoLido.append(linha);
         }
 
-        String[] separandoString = arquivoLido.toString().split(",");
         ArrayList<Integer> listaTXTFinal = new ArrayList<>();
+        ArrayList<String> diferentesDeInteger = new ArrayList<>();
 
-        for (String s : separandoString) {
-            s = s.trim();
-            if (!s.isEmpty()) {
-                Integer adicionaLista = Integer.valueOf(s);
-                listaTXTFinal.add(adicionaLista);
+        for (String numeroLista : arquivoLido.toString().split(",")) {
+            Integer valorSemEspacos = 0;
+            try {
+                valorSemEspacos = Integer.valueOf(numeroLista.trim());
+                listaTXTFinal.add(valorSemEspacos);
+            } catch (NumberFormatException ex) {
+                diferentesDeInteger.add(numeroLista);
+                System.out.println("Diferente de Integer: " + numeroLista);
             }
         }
         return listaTXTFinal;
@@ -44,7 +48,7 @@ public class ListaService {
         StringBuilder criaConteudoTexto = new StringBuilder();
         for (int i = 0; i < lista.size(); i++) {
             criaConteudoTexto.append(lista.get(i));
-            if(i != lista.size() - 1){
+            if (i != lista.size() - 1) {
                 criaConteudoTexto.append(",");
             }
         }

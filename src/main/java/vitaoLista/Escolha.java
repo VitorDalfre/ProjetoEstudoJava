@@ -1,3 +1,4 @@
+package vitaoLista;
 public enum Escolha {
 
     NUMEROS_PARES(1, "NUMEROS PARES"),

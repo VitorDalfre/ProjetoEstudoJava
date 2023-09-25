@@ -1,10 +1,12 @@
+package vitaoLista;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuService {
     public void menuDeEscolha(ArrayList<Integer> listaDeNumeros) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Escolha uma opção: ");
+        System.out.println("Escolha uma opcao: ");
         System.out.println(mostraOpcoesEnum());
         int escolha = sc.nextInt();
         Escolha escolhaUser = Escolha.getById(escolha);
@@ -27,12 +29,12 @@ public class MenuService {
 
         switch (opcaoEscolhida) {
             case NUMEROS_PARES:
-                ArrayList pares = listaService.apenasNumerosParesDaLista(listaDeNumeros);
+                ArrayList<Integer> pares = listaService.apenasNumerosParesDaLista(listaDeNumeros);
                 System.out.println(opcaoEscolhida.getDescricao() + " - " + pares);
                 menuDeEscolha(listaDeNumeros);
                 break;
             case NUMEROS_IMPARES:
-                ArrayList impares = listaService.apenasNumerosImparesDaLista(listaDeNumeros);
+                ArrayList<Integer> impares = listaService.apenasNumerosImparesDaLista(listaDeNumeros);
                 System.out.println(opcaoEscolhida.getDescricao() + " - " + impares);
                 menuDeEscolha(listaDeNumeros);
                 break;

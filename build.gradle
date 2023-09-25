@@ -7,8 +7,8 @@ jacoco {
     toolVersion = "0.8.7"
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'vitaoLTDA.codigoViolento'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -25,4 +25,10 @@ test {
 
 jacocoTestReport {
     dependsOn test
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'vitaoLista.MainListaVindaDeUmTXT'
+    }
 }

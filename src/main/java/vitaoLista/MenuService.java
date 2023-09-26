@@ -11,7 +11,12 @@ public class MenuService {
         int escolha = sc.nextInt();
         Escolha escolhaUser = Escolha.getById(escolha);
 
-        direcionarEscolha(escolhaUser, listaDeNumeros);
+        try {
+            direcionarEscolha(escolhaUser, listaDeNumeros);
+        } catch (NullPointerException ex){
+            System.out.println("Escolha Invalida! Tente novamente");
+            menuDeEscolha(listaDeNumeros);
+        }
     }
 
     private String mostraOpcoesEnum() {
@@ -48,9 +53,8 @@ public class MenuService {
                 System.out.println(opcaoEscolhida.getDescricao() + " - " + menor);
                 menuDeEscolha(listaDeNumeros);
                 break;
-            case FINALIZA_PROGRAMA:
-                System.out.println("Obrigado por utilizar o sistema!");
-                System.exit(0);
+            case FINALIZA_FUNCOES_LISTA:
+                System.out.println("Fim das Operações!");
                 break;
             default:
                 System.out.println("Escolha inválida!");

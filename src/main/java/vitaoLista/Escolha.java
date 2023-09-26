@@ -5,7 +5,7 @@ public enum Escolha {
     NUMEROS_IMPARES(2, "NUMEROS IMPARES"),
     MAIOR_NUMERO(3, "MAIOR NUMERO"),
     MENOR_NUMER0(4, "MENOR NUMERO"),
-    FINALIZA_PROGRAMA(5, "FINALIZA PROGRAMA");
+    FINALIZA_FUNCOES_LISTA(5, "FINALIZA FUNCOES LISTA");
 
     private final int id;
     private final String descricao;
@@ -29,7 +29,6 @@ public enum Escolha {
                 return escolha;
             }
         }
-
         return null;
     }
 }

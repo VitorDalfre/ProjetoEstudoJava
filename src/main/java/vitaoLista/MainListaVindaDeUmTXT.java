@@ -23,7 +23,5 @@ public class MainListaVindaDeUmTXT {
         String caminhoSalvarLista = sc.next();
         OutputStreamWriter caminhoParaEscrever = new OutputStreamWriter(new FileOutputStream(caminhoSalvarLista));
         service.escreverNoArquivoTXT(lista, caminhoParaEscrever);
-
-        System.out.println("Testando criação de branch a parte!");
     }
 }

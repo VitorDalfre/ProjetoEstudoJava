@@ -1,6 +1,7 @@
 package vitaoLista;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuService {
@@ -8,8 +9,15 @@ public class MenuService {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");
         System.out.println(mostraOpcoesEnum());
-        int escolha = sc.nextInt();
-        Escolha escolhaUser = Escolha.getById(escolha);
+        Escolha escolhaUser = null;
+
+        try {
+            int escolha = sc.nextInt();
+            escolhaUser = Escolha.getById(escolha);
+        }catch (InputMismatchException ex){
+            System.out.println("Opcao Invalida! Tente novamente!");
+            menuDeEscolha(listaDeNumeros);
+        }
 
         try {
             direcionarEscolha(escolhaUser, listaDeNumeros);

@@ -5,25 +5,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuService {
-    public void menuDeEscolha(ArrayList<Integer> listaDeNumeros) {
+    public void menuDeEscolha() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");
         System.out.println(mostraOpcoesEnum());
-        Escolha escolhaUser = null;
+        Escolha escolhaUser;
 
         try {
             int escolha = sc.nextInt();
             escolhaUser = Escolha.getById(escolha);
-        }catch (InputMismatchException ex){
-            System.out.println("Opcao Invalida! Tente novamente!");
-            menuDeEscolha(listaDeNumeros);
-        }
-
-        try {
-            direcionarEscolha(escolhaUser, listaDeNumeros);
-        } catch (NullPointerException ex){
+            direcionarEscolha(escolhaUser);
+        }catch (InputMismatchException | NullPointerException ex){
             System.out.println("Escolha Invalida! Tente novamente");
-            menuDeEscolha(listaDeNumeros);
+            menuDeEscolha();
         }
     }
 
@@ -36,37 +30,37 @@ public class MenuService {
         return opcoes.toString();
     }
 
-    public void direcionarEscolha(Escolha opcaoEscolhida, ArrayList<Integer> listaDeNumeros) {
+    public void direcionarEscolha(Escolha opcaoEscolhida) {
 
         ListaService listaService = new ListaService();
 
         switch (opcaoEscolhida) {
+            case CRIAR_LISTA:
+                listaService.geraListaDe30NumeroAleatorio();
+                menuDeEscolha();
+                break;
+            case VER_LISTA:
+                listaService.mostraLista();
+                menuDeEscolha();
+                break;
             case NUMEROS_PARES:
-                ArrayList<Integer> pares = listaService.apenasNumerosParesDaLista(listaDeNumeros);
-                System.out.println(opcaoEscolhida.getDescricao() + " - " + pares);
-                menuDeEscolha(listaDeNumeros);
+                menuDeEscolha();
                 break;
             case NUMEROS_IMPARES:
-                ArrayList<Integer> impares = listaService.apenasNumerosImparesDaLista(listaDeNumeros);
-                System.out.println(opcaoEscolhida.getDescricao() + " - " + impares);
-                menuDeEscolha(listaDeNumeros);
+                menuDeEscolha();
                 break;
             case MAIOR_NUMERO:
-                Integer maior = listaService.maiorNumeroDaLista(listaDeNumeros);
-                System.out.println(opcaoEscolhida.getDescricao() + " - " + maior);
-                menuDeEscolha(listaDeNumeros);
+                menuDeEscolha();
                 break;
             case MENOR_NUMER0:
-                Integer menor = listaService.menorNumeroDaLista(listaDeNumeros);
-                System.out.println(opcaoEscolhida.getDescricao() + " - " + menor);
-                menuDeEscolha(listaDeNumeros);
+                menuDeEscolha();
                 break;
             case FINALIZA_FUNCOES_LISTA:
                 System.out.println("Fim das Operações!");
                 break;
             default:
                 System.out.println("Escolha inválida!");
-                menuDeEscolha(listaDeNumeros);
+                menuDeEscolha();
                 break;
         }
 

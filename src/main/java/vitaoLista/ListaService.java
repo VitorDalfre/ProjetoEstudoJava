@@ -1,21 +1,41 @@
 package vitaoLista;
 
 import java.io.*;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
-
+import java.util.Scanner;
 
 public class ListaService {
 
-    public ArrayList<Integer> geraListaDe30NumeroAleatorio() {
+    private final ConexaoComBanco conexao;
+
+    public ListaService() {
+        this.conexao = new ConexaoComBanco();
+    }
+
+    public void geraListaDe30NumeroAleatorio() {
         ArrayList<Integer> listaNumeros = new ArrayList<>();
+        StringBuilder listaEmString = new StringBuilder();
+
+            Random random = new Random();
 
         for (int i = 0; i < 30; i++) {
-            Random random = new Random();
             Integer numeroAleatorio = random.nextInt(1000);
             listaNumeros.add(numeroAleatorio);
         }
-        return listaNumeros;
+
+        for (Integer inteiro : listaNumeros) {
+            if(listaEmString.toString().isEmpty()) {
+                listaEmString.append(inteiro);
+            } else {
+                listaEmString.append(", ").append(inteiro);
+            }
+        }
+
+        Connection con = conexao.recuperaConexao();
+        new ContaDAO(con).salvaListaEmBanco(listaEmString.toString());
     }
 
     public ArrayList<Integer> lerListaTXT(InputStreamReader caminhoArquivo) throws IOException {
@@ -31,7 +51,7 @@ public class ListaService {
         ArrayList<String> diferentesDeInteger = new ArrayList<>();
 
         for (String numeroLista : arquivoLido.toString().split(",")) {
-            Integer valorSemEspacos = 0;
+            Integer valorSemEspacos;
             try {
                 valorSemEspacos = Integer.valueOf(numeroLista.trim());
                 listaTXTFinal.add(valorSemEspacos);
@@ -96,5 +116,21 @@ public class ListaService {
             }
         }
         return menorNumero;
+    }
+
+    public void mostraLista(){
+        Scanner sc = new Scanner(System.in);
+        int id = 0;
+
+        System.out.println("Digite o ID da lista que deseja consultar: ");
+        try {
+            id = sc.nextInt();
+        } catch (InputMismatchException e){
+            System.out.println("Opção Inválida! ");
+            mostraLista();
+        }
+
+        String lista = new ContaDAO(conexao.recuperaConexao()).consultaLista(id);
+        System.out.println(lista);
     }
 }

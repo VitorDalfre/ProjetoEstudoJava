@@ -17,25 +17,39 @@ public class ListaService {
 
     public void geraListaDe30NumeroAleatorio() {
         ArrayList<Integer> listaNumeros = new ArrayList<>();
-        StringBuilder listaEmString = new StringBuilder();
 
-            Random random = new Random();
+        Random random = new Random();
 
         for (int i = 0; i < 30; i++) {
             Integer numeroAleatorio = random.nextInt(1000);
             listaNumeros.add(numeroAleatorio);
         }
 
-        for (Integer inteiro : listaNumeros) {
-            if(listaEmString.toString().isEmpty()) {
+        String listaEmString = transformaListaEmString(listaNumeros);
+        String numerosPares = transformaListaEmString(apenasNumerosParesDaLista(listaNumeros));
+        String numerosImpares = transformaListaEmString(apenasNumerosImparesDaLista(listaNumeros));
+        Integer maiorNumero = maiorNumeroDaLista(listaNumeros);
+        Integer menorNumero = menorNumeroDaLista(listaNumeros);
+
+        Connection con = conexao.recuperaConexao();
+        new ContaDAO(con).salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
+    }
+
+    private String transformaListaEmString(ArrayList<Integer> lista) {
+        StringBuilder listaEmString = new StringBuilder();
+
+        for (Integer inteiro : lista) {
+            if (listaEmString.toString().isEmpty()) {
                 listaEmString.append(inteiro);
             } else {
                 listaEmString.append(", ").append(inteiro);
             }
         }
+        return listaEmString.toString();
+    }
 
-        Connection con = conexao.recuperaConexao();
-        new ContaDAO(con).salvaListaEmBanco(listaEmString.toString());
+    private void detalhamentoLista(ArrayList<Integer> lista) {
+
     }
 
     public ArrayList<Integer> lerListaTXT(InputStreamReader caminhoArquivo) throws IOException {
@@ -118,14 +132,14 @@ public class ListaService {
         return menorNumero;
     }
 
-    public void mostraLista(){
+    public void mostraLista() {
         Scanner sc = new Scanner(System.in);
         int id = 0;
 
         System.out.println("Digite o ID da lista que deseja consultar: ");
         try {
             id = sc.nextInt();
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Opção Inválida! ");
             mostraLista();
         }

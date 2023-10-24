@@ -45,7 +45,7 @@ public class CriarTabelasDAO {
                     .append("(id SERIAL PRIMARY KEY,")
                     .append("listacompleta VARCHAR(255),")
                     .append("numerospares VARCHAR(255),")
-                    .append("numeroimpares VARCHAR(255),")
+                    .append("numerosimpares VARCHAR(255),")
                     .append("maiornumero INT,")
                     .append("menornumero INT)");
 

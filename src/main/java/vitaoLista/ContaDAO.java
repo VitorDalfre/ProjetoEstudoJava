@@ -13,10 +13,17 @@ public class ContaDAO {
         this.con = connection;
     }
 
-    public void salvaListaEmBanco(String lista) {
+    public void salvaListaEmBanco(String listaCompleta, String pares, String impares, Integer maior, Integer menor) {
         StringBuilder sql = new StringBuilder();
 
-        sql.append("INSERT INTO listas (listacompleta) ").append("VALUES ('").append(lista).append("')");
+        sql.append("INSERT INTO listas (listacompleta, numerospares, numerosimpares, maiornumero, menornumero) ")
+                .append("VALUES ('")
+                .append(listaCompleta).append("','")
+                .append(pares).append("','")
+                .append(impares).append("',")
+                .append(maior).append(",")
+                .append(menor).append(")");
+
 
         try {
             Statement stm = con.createStatement();
@@ -52,6 +59,29 @@ public class ContaDAO {
             throw new RuntimeException("Erro ao consultar tabela!");
         }
         return lista;
+    }
+
+    public String consultaNumerosParesLista(int idLista) {
+        String listaPares = null;
+        Statement stm;
+        ResultSet rst;
+
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT numerospares FROM listas WHERE id = ").append(idLista);
+
+        try {
+            stm = con.createStatement();
+            rst = stm.executeQuery(sql.toString());
+
+            if (rst.next()) {
+                listaPares = rst.getString(1);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar Query! ");
+        }
+        return listaPares;
     }
 
 }

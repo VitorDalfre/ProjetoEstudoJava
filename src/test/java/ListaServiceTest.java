@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import vitaoLista.ListaService;
+import vitaoLista.Service.ListaService;
 
 import java.util.ArrayList;
 

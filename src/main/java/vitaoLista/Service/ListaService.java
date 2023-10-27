@@ -1,4 +1,7 @@
-package vitaoLista;
+package vitaoLista.Service;
+
+import vitaoLista.ConexaoComBanco;
+import vitaoLista.DAO.ContaDAO;
 
 import java.io.*;
 import java.sql.Connection;
@@ -8,12 +11,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ListaService {
-
-    private final ConexaoComBanco conexao;
-
-    public ListaService() {
-        this.conexao = new ConexaoComBanco();
-    }
 
     public void geraListaDe30NumeroAleatorio() {
         ArrayList<Integer> listaNumeros = new ArrayList<>();
@@ -31,8 +28,7 @@ public class ListaService {
         Integer maiorNumero = maiorNumeroDaLista(listaNumeros);
         Integer menorNumero = menorNumeroDaLista(listaNumeros);
 
-        Connection con = conexao.recuperaConexao();
-        new ContaDAO(con).salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
+        new ContaDAO().salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
     }
 
     private String transformaListaEmString(ArrayList<Integer> lista) {
@@ -144,7 +140,7 @@ public class ListaService {
             mostraLista();
         }
 
-        String lista = new ContaDAO(conexao.recuperaConexao()).consultaLista(id);
+        String lista = new ContaDAO().consultaLista(id);
         System.out.println(lista);
     }
 }

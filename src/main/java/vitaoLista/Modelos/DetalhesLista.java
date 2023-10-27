@@ -1,11 +1,12 @@
-package vitaoLista;
+package vitaoLista.Modelos;
 
 public enum DetalhesLista {
 
     NUMEROS_PARES(1, "NUMEROS PARES"),
     NUMEROS_IMPARES(2, "NUMEROS IMPARES"),
     MAIOR_NUMERO(3, "MAIOR NUMERO"),
-    MENOR_NUMERO(4, "MENOR NUMERO");
+    MENOR_NUMERO(4, "MENOR NUMERO"),
+    VOLTAR_MENU_PRINCIPAL(5,"VOLTAR AO MENU PRINCIPAL");
 
     private final int id;
     private final  String descricao;

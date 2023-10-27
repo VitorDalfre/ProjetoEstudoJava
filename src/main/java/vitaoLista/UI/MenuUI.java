@@ -1,9 +1,12 @@
-package vitaoLista;
+package vitaoLista.UI;
+
+import vitaoLista.Modelos.Escolha;
+import vitaoLista.Service.ListaService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MenuService {
+public class MenuUI {
     public void menuDeEscolha() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");
@@ -32,7 +35,7 @@ public class MenuService {
     public void direcionarEscolha(Escolha opcaoEscolhida) {
 
         ListaService listaService = new ListaService();
-        MenuDetalhamentoService menuDetalhamento = new MenuDetalhamentoService();
+        MenuDetalhamentoUI menuDetalhamento = new MenuDetalhamentoUI();
 
         switch (opcaoEscolhida) {
             case CRIAR_LISTA:

@@ -1,4 +1,6 @@
-package vitaoLista;
+package vitaoLista.DAO;
+
+import vitaoLista.ConexaoComBanco;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,12 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CriarTabelasDAO {
-
-    private final Connection con;
-
-    public CriarTabelasDAO(Connection connection) {
-        this.con = connection;
-    }
 
     private boolean verificaTabelaListasExiste() {
         Statement stm;
@@ -22,7 +18,7 @@ public class CriarTabelasDAO {
         sql.append("SELECT EXISTS (SELECT FROM pg_tables WHERE tablename = 'listas');");
 
         try {
-            stm = con.createStatement();
+            stm = ConexaoComBanco.getConexao().createStatement();
             rst = stm.executeQuery(sql.toString());
 
             if (rst.next()) {
@@ -50,10 +46,10 @@ public class CriarTabelasDAO {
                     .append("menornumero INT)");
 
             try {
-                Statement stm = con.createStatement();
+                Statement stm = ConexaoComBanco.getConexao().createStatement();
                 stm.executeUpdate(sql.toString());
                 stm.close();
-                con.close();
+                ConexaoComBanco.getConexao().close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

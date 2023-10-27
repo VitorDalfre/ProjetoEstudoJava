@@ -1,9 +1,12 @@
-package vitaoLista;
+package vitaoLista.UI;
+
+import vitaoLista.DAO.ContaDAO;
+import vitaoLista.Modelos.DetalhesLista;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MenuDetalhamentoService {
+public class MenuDetalhamentoUI {
 
     public void selecionaOpcaoDeDetalhamento() {
         Scanner sc = new Scanner(System.in);
@@ -14,7 +17,7 @@ public class MenuDetalhamentoService {
 
         try {
             idLista = sc.nextInt();
-            System.out.println("Agora escolha a opção de detalhamento: \n");
+            System.out.println("Agora escolha a opção de detalhamento:");
             System.out.println(menuDeOpcoesDetalhesLista());
             int idDetalhe = sc.nextInt();
             opcaoDetalhe = DetalhesLista.getById(idDetalhe);
@@ -30,18 +33,25 @@ public class MenuDetalhamentoService {
 
         switch (idDetalhe) {
             case NUMEROS_PARES:
-                //chama pares no banco
+                System.out.println(new ContaDAO().consultaNumerosParesLista(idLista));
+                selecionaOpcaoDeDetalhamento();
                 break;
             case NUMEROS_IMPARES:
-                //chama impares no banco
+                System.out.println(new ContaDAO().consultaNumerosImparesLista(idLista));
+                selecionaOpcaoDeDetalhamento();
                 break;
             case MAIOR_NUMERO:
-                //chama maior no banco
+                System.out.println(new ContaDAO().consultaMaiorNumero(idLista));
+                selecionaOpcaoDeDetalhamento();
                 break;
             case MENOR_NUMERO:
-                //chama menor no banco
+                System.out.println(new ContaDAO().consultaMenorNumero(idLista));
+                selecionaOpcaoDeDetalhamento();
+                break;
+            case VOLTAR_MENU_PRINCIPAL:
                 break;
             default:
+                System.out.println("Opção Inválida!");
                 break;
         }
     }
@@ -50,7 +60,7 @@ public class MenuDetalhamentoService {
         StringBuilder opcoes = new StringBuilder();
 
         for (DetalhesLista opcao : DetalhesLista.values()) {
-            opcoes.append(opcao.getId()).append(" - ").append(opcao.getDescricao());
+            opcoes.append(opcao.getId()).append(" - ").append(opcao.getDescricao()).append("\n");
         }
         return opcoes.toString();
     }

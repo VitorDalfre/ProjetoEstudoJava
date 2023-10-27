@@ -1,4 +1,4 @@
-package vitaoLista;
+package vitaoLista.Modelos;
 public enum Escolha {
 
     CRIAR_LISTA(1,"CRIAR LISTA ALEATORIA"),

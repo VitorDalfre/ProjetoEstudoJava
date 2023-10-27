@@ -1,19 +1,15 @@
-import vitaoLista.*;
-
-import java.sql.Connection;
+import vitaoLista.DAO.CriarTabelasDAO;
+import vitaoLista.UI.MenuUI;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ConexaoComBanco con = new ConexaoComBanco();
-        Connection conn = con.recuperaConexao();
-
-        CriarTabelasDAO att = new CriarTabelasDAO(conn);
+        CriarTabelasDAO att = new CriarTabelasDAO();
         att.criaTabelaLista();
 
-//        MenuService menuService = new MenuService();
-//        menuService.menuDeEscolha();
+        MenuUI menuService = new MenuUI();
+        menuService.menuDeEscolha();
 
 
     }

@@ -163,4 +163,19 @@ public class ContaDAO {
         return menorNumero;
     }
 
+    public void adicionaObservacao (Integer idLista, String observacao){
+        Statement stm;
+        StringBuilder sql = new StringBuilder("UPDATE listas SET observacao = '")
+                .append(observacao)
+                .append("' WHERE id =")
+                .append(idLista);
+
+        try{
+            stm = ConexaoComBanco.getConexao().createStatement();
+            stm.execute(sql.toString());
+        }catch (SQLException e){
+            throw new RuntimeException("Erro ao inserir observação!");
+        }
+    }
+
 }

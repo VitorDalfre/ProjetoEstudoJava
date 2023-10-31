@@ -43,7 +43,8 @@ public class CriarTabelasDAO {
                     .append("numerospares VARCHAR(255),")
                     .append("numerosimpares VARCHAR(255),")
                     .append("maiornumero INT,")
-                    .append("menornumero INT)");
+                    .append("menornumero INT)")
+                    .append("observacao VARCHAR(255)");
 
             try {
                 Statement stm = ConexaoComBanco.getConexao().createStatement();

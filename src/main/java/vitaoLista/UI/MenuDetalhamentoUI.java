@@ -2,6 +2,7 @@ package vitaoLista.UI;
 
 import vitaoLista.DAO.ContaDAO;
 import vitaoLista.Modelos.DetalhesLista;
+import vitaoLista.Service.DetalhamentoService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public class MenuDetalhamentoUI {
     }
 
     private void direcionadaOpcaoDetalhada(int idLista, DetalhesLista idDetalhe) {
+        DetalhamentoService detalhamentoService = new DetalhamentoService();
 
         switch (idDetalhe) {
             case NUMEROS_PARES:
@@ -43,6 +45,9 @@ public class MenuDetalhamentoUI {
                 break;
             case MENOR_NUMERO:
                 System.out.println(new ContaDAO().consultaMenorNumero(idLista));
+                break;
+            case ADICIONAR_OBSERVACAO:
+                detalhamentoService.adicionaObservacaoLista(idLista);
                 break;
             case VOLTAR_MENU_PRINCIPAL:
                 break;

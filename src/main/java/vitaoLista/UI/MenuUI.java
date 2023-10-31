@@ -46,6 +46,10 @@ public class MenuUI {
                 listaService.mostraLista();
                 menuDeEscolha();
                 break;
+            case VER_TODAS_LISTAS:
+                listaService.mostraTodasListas();
+                menuDeEscolha();
+                break;
             case DETALHES_LISTA:
                 menuDetalhamento.selecionaOpcaoDeDetalhamento();
                 menuDeEscolha();

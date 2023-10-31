@@ -34,19 +34,15 @@ public class MenuDetalhamentoUI {
         switch (idDetalhe) {
             case NUMEROS_PARES:
                 System.out.println(new ContaDAO().consultaNumerosParesLista(idLista));
-                selecionaOpcaoDeDetalhamento();
                 break;
             case NUMEROS_IMPARES:
                 System.out.println(new ContaDAO().consultaNumerosImparesLista(idLista));
-                selecionaOpcaoDeDetalhamento();
                 break;
             case MAIOR_NUMERO:
                 System.out.println(new ContaDAO().consultaMaiorNumero(idLista));
-                selecionaOpcaoDeDetalhamento();
                 break;
             case MENOR_NUMERO:
                 System.out.println(new ContaDAO().consultaMenorNumero(idLista));
-                selecionaOpcaoDeDetalhamento();
                 break;
             case VOLTAR_MENU_PRINCIPAL:
                 break;

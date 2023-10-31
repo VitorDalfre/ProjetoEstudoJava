@@ -2,10 +2,10 @@ package vitaoLista.DAO;
 
 import vitaoLista.ConexaoComBanco;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ContaDAO {
 
@@ -37,14 +37,14 @@ public class ContaDAO {
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT * FROM listas WHERE id = ").append(idLista);
+        sql.append("SELECT listacompleta FROM listas WHERE id = ").append(idLista);
 
         try {
             stm = ConexaoComBanco.getConexao().createStatement();
             rst = stm.executeQuery(sql.toString());
 
             if (rst.next()) {
-                lista = rst.getString(2);
+                lista = rst.getString(1);
             }
             rst.close();
             stm.close();
@@ -53,6 +53,26 @@ public class ContaDAO {
             throw new RuntimeException("Erro ao consultar tabela!");
         }
         return lista;
+    }
+
+    public ArrayList<String> consultaTodasListas(){
+        ArrayList<String> todasListas = new ArrayList<>();
+        Statement stm;
+        ResultSet rst;
+
+        StringBuilder sql = new StringBuilder("SELECT listacompleta FROM listas");
+
+        try {
+            stm = ConexaoComBanco.getConexao().createStatement();
+            rst = stm.executeQuery(sql.toString());
+
+            while(rst.next()){
+                todasListas.add(rst.getString(1));
+            }
+        }catch (SQLException e){
+            throw new RuntimeException("Erro na consulta de listas!");
+        }
+        return todasListas;
     }
 
     public String consultaNumerosParesLista(int idLista) {
@@ -107,7 +127,7 @@ public class ContaDAO {
         ResultSet rst;
 
         StringBuilder sql;
-        sql = new StringBuilder("SELECT maiornumero FROM listas WHERE").append(idLista);
+        sql = new StringBuilder("SELECT maiornumero FROM listas WHERE id =").append(idLista);
 
         try{
             stm = ConexaoComBanco.getConexao().createStatement();
@@ -128,7 +148,7 @@ public class ContaDAO {
         ResultSet rst;
 
         StringBuilder sql;
-        sql = new StringBuilder("SELECT menornumero FROM listas WHERE").append(idLista);
+        sql = new StringBuilder("SELECT menornumero FROM listas WHERE id =").append(idLista);
 
         try{
             stm = ConexaoComBanco.getConexao().createStatement();

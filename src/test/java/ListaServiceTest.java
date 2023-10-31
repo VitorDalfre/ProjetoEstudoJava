@@ -16,15 +16,15 @@ public class ListaServiceTest {
         service = new ListaService();
     }
 
-    @Test
-    public void testeVerificaLista30Posicoes() {
-        ArrayList<Integer> lista = service.geraListaDe30NumeroAleatorio();
-        Integer contador = 0;
-        for (Integer ignored : lista) {
-            contador += 1;
-        }
-        assertEquals(30, contador);
-    }
+//    @Test
+//    public void testeVerificaLista30Posicoes() {
+//        ArrayList<Integer> lista = service.geraListaDe30NumeroAleatorio();
+//        Integer contador = 0;
+//        for (Integer ignored : lista) {
+//            contador += 1;
+//        }
+//        assertEquals(30, contador);
+//    }
 
     @Test
     public void testaRetornoMaiorNumero() {

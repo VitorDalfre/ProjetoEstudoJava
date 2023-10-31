@@ -1,10 +1,8 @@
 package vitaoLista.Service;
 
-import vitaoLista.ConexaoComBanco;
 import vitaoLista.DAO.ContaDAO;
 
 import java.io.*;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -21,12 +19,16 @@ public class ListaService {
             Integer numeroAleatorio = random.nextInt(1000);
             listaNumeros.add(numeroAleatorio);
         }
+        insereListaEmBanco(listaNumeros);
+    }
 
-        String listaEmString = transformaListaEmString(listaNumeros);
-        String numerosPares = transformaListaEmString(apenasNumerosParesDaLista(listaNumeros));
-        String numerosImpares = transformaListaEmString(apenasNumerosImparesDaLista(listaNumeros));
-        Integer maiorNumero = maiorNumeroDaLista(listaNumeros);
-        Integer menorNumero = menorNumeroDaLista(listaNumeros);
+    private void insereListaEmBanco(ArrayList<Integer> pListaNumeros) {
+
+        String listaEmString = transformaListaEmString(pListaNumeros);
+        String numerosPares = transformaListaEmString(apenasNumerosParesDaLista(pListaNumeros));
+        String numerosImpares = transformaListaEmString(apenasNumerosImparesDaLista(pListaNumeros));
+        Integer maiorNumero = maiorNumeroDaLista(pListaNumeros);
+        Integer menorNumero = menorNumeroDaLista(pListaNumeros);
 
         new ContaDAO().salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
     }
@@ -44,10 +46,6 @@ public class ListaService {
         return listaEmString.toString();
     }
 
-    private void detalhamentoLista(ArrayList<Integer> lista) {
-
-    }
-
     public ArrayList<Integer> lerListaTXT(InputStreamReader caminhoArquivo) throws IOException {
         BufferedReader lerLista = new BufferedReader(caminhoArquivo);
         StringBuilder arquivoLido = new StringBuilder();
@@ -61,9 +59,9 @@ public class ListaService {
         ArrayList<String> diferentesDeInteger = new ArrayList<>();
 
         for (String numeroLista : arquivoLido.toString().split(",")) {
-            Integer valorSemEspacos;
+            int valorSemEspacos;
             try {
-                valorSemEspacos = Integer.valueOf(numeroLista.trim());
+                valorSemEspacos = Integer.parseInt(numeroLista.trim());
                 listaTXTFinal.add(valorSemEspacos);
             } catch (NumberFormatException ex) {
                 diferentesDeInteger.add(numeroLista);
@@ -142,5 +140,13 @@ public class ListaService {
 
         String lista = new ContaDAO().consultaLista(id);
         System.out.println(lista);
+    }
+
+    public void mostraTodasListas() {
+        ArrayList<String> todasListas = new ContaDAO().consultaTodasListas();
+
+        for (String lista : todasListas) {
+            System.out.println(lista);
+        }
     }
 }

@@ -10,7 +10,12 @@ import java.util.Scanner;
 
 public class MenuUI {
 
-    private ListaDAO listaDAO;
+    private final ListaDAO listaDAO;
+
+    public MenuUI() {
+        this.listaDAO = new ListaDAO();
+    }
+
     public void menuDeEscolha() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");

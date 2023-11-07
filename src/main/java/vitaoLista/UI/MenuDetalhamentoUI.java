@@ -9,7 +9,11 @@ import java.util.Scanner;
 
 public class MenuDetalhamentoUI {
 
-    private ListaDAO listaDAO;
+    private final ListaDAO listaDAO;
+
+    public MenuDetalhamentoUI() {
+        this.listaDAO = new ListaDAO();
+    }
 
     public void selecionaOpcaoDeDetalhamento() {
         Scanner sc = new Scanner(System.in);

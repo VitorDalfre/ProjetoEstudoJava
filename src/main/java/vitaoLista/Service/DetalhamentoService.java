@@ -27,19 +27,19 @@ public class DetalhamentoService {
         this.listaDAO.adicionaObservacao(idLista, observacao);
     }
 
-    public String numerosPares(Integer idLista){
+    public String numerosPares(int idLista){
         return listaDAO.consultaNumerosParesLista(idLista);
     }
 
-    public String numerosImpares(Integer idLista){
+    public String numerosImpares(int idLista){
         return listaDAO.consultaNumerosImparesLista(idLista);
     }
 
-    public Integer maiorNumero(Integer idLista){
+    public Integer maiorNumero(int idLista){
         return listaDAO.consultaMaiorNumero(idLista);
     }
 
-    public Integer menorNumero(Integer idLista){
+    public Integer menorNumero(int idLista){
         return listaDAO.consultaMenorNumero(idLista);
     }
 }

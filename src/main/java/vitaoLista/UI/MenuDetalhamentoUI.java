@@ -1,6 +1,6 @@
 package vitaoLista.UI;
 
-import vitaoLista.DAO.ContaDAO;
+import vitaoLista.DAO.ListaDAO;
 import vitaoLista.Modelos.DetalhesLista;
 import vitaoLista.Service.DetalhamentoService;
 
@@ -8,6 +8,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuDetalhamentoUI {
+
+    private ListaDAO listaDAO;
 
     public void selecionaOpcaoDeDetalhamento() {
         Scanner sc = new Scanner(System.in);
@@ -31,20 +33,20 @@ public class MenuDetalhamentoUI {
     }
 
     private void direcionadaOpcaoDetalhada(int idLista, DetalhesLista idDetalhe) {
-        DetalhamentoService detalhamentoService = new DetalhamentoService();
+        DetalhamentoService detalhamentoService = new DetalhamentoService(listaDAO);
 
         switch (idDetalhe) {
             case NUMEROS_PARES:
-                System.out.println(new ContaDAO().consultaNumerosParesLista(idLista));
+                System.out.println(detalhamentoService.numerosPares(idLista));
                 break;
             case NUMEROS_IMPARES:
-                System.out.println(new ContaDAO().consultaNumerosImparesLista(idLista));
+                System.out.println(detalhamentoService.numerosImpares(idLista));
                 break;
             case MAIOR_NUMERO:
-                System.out.println(new ContaDAO().consultaMaiorNumero(idLista));
+                System.out.println(detalhamentoService.maiorNumero(idLista));
                 break;
             case MENOR_NUMERO:
-                System.out.println(new ContaDAO().consultaMenorNumero(idLista));
+                System.out.println(detalhamentoService.menorNumero(idLista));
                 break;
             case ADICIONAR_OBSERVACAO:
                 detalhamentoService.adicionaObservacaoLista(idLista);

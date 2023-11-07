@@ -1,6 +1,6 @@
 package vitaoLista.Service;
 
-import vitaoLista.DAO.ContaDAO;
+import vitaoLista.DAO.ListaDAO;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,7 +10,13 @@ import java.util.Scanner;
 
 public class ListaService {
 
-    public void geraListaDe30NumeroAleatorio() {
+    ListaDAO listaDAO;
+
+    public ListaService(ListaDAO listaDAO) {
+        this.listaDAO = listaDAO;
+    }
+
+    public ArrayList<Integer> geraListaDe30NumeroAleatorio() {
         ArrayList<Integer> listaNumeros = new ArrayList<>();
 
         Random random = new Random();
@@ -19,10 +25,10 @@ public class ListaService {
             Integer numeroAleatorio = random.nextInt(1000);
             listaNumeros.add(numeroAleatorio);
         }
-        insereListaEmBanco(listaNumeros);
+        return listaNumeros;
     }
 
-    private void insereListaEmBanco(ArrayList<Integer> pListaNumeros) {
+    public void insereListaEmBanco(ArrayList<Integer> pListaNumeros) {
 
         String listaEmString = transformaListaEmString(pListaNumeros);
         String numerosPares = transformaListaEmString(apenasNumerosParesDaLista(pListaNumeros));
@@ -30,7 +36,7 @@ public class ListaService {
         Integer maiorNumero = maiorNumeroDaLista(pListaNumeros);
         Integer menorNumero = menorNumeroDaLista(pListaNumeros);
 
-        new ContaDAO().salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
+        new ListaDAO().salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
     }
 
     private String transformaListaEmString(ArrayList<Integer> lista) {
@@ -138,12 +144,12 @@ public class ListaService {
             mostraLista();
         }
 
-        String lista = new ContaDAO().consultaLista(id);
+        String lista = new ListaDAO().consultaLista(id);
         System.out.println(lista);
     }
 
     public void mostraTodasListas() {
-        ArrayList<String> todasListas = new ContaDAO().consultaTodasListas();
+        ArrayList<String> todasListas = new ListaDAO().consultaTodasListas();
 
         for (String lista : todasListas) {
             System.out.println(lista);

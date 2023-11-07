@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ContaDAO {
+public class ListaDAO {
 
     public void salvaListaEmBanco(String listaCompleta, String pares, String impares, Integer maior, Integer menor) {
         StringBuilder sql = new StringBuilder();

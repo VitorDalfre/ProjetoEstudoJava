@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vitaoLista.DAO.ListaDAO;
 import vitaoLista.Service.ListaService;
 
 import java.util.ArrayList;
@@ -10,21 +11,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListaServiceTest {
 
     private ListaService service;
+    private ListaDAO listaDAO;
 
     @BeforeEach
     public void inicializar() {
-        service = new ListaService();
+        service = new ListaService(listaDAO);
     }
 
-//    @Test
-//    public void testeVerificaLista30Posicoes() {
-//        ArrayList<Integer> lista = service.geraListaDe30NumeroAleatorio();
-//        Integer contador = 0;
-//        for (Integer ignored : lista) {
-//            contador += 1;
-//        }
-//        assertEquals(30, contador);
-//    }
+    @Test
+    public void testeVerificaLista30Posicoes() {
+        ArrayList<Integer> lista = service.geraListaDe30NumeroAleatorio();
+        Integer contador = 0;
+        for (Integer ignored : lista) {
+            contador += 1;
+        }
+        assertEquals(30, contador);
+    }
 
     @Test
     public void testaRetornoMaiorNumero() {

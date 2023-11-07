@@ -1,12 +1,16 @@
 package vitaoLista.UI;
 
+import vitaoLista.DAO.ListaDAO;
 import vitaoLista.Modelos.Escolha;
 import vitaoLista.Service.ListaService;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuUI {
+
+    private ListaDAO listaDAO;
     public void menuDeEscolha() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");
@@ -34,12 +38,13 @@ public class MenuUI {
 
     public void direcionarEscolha(Escolha opcaoEscolhida) {
 
-        ListaService listaService = new ListaService();
+        ListaService listaService = new ListaService(listaDAO);
         MenuDetalhamentoUI menuDetalhamento = new MenuDetalhamentoUI();
 
         switch (opcaoEscolhida) {
             case CRIAR_LISTA:
-                listaService.geraListaDe30NumeroAleatorio();
+                ArrayList<Integer> listaAleatoria = listaService.geraListaDe30NumeroAleatorio();
+                salvarLista(listaAleatoria);
                 menuDeEscolha();
                 break;
             case VER_LISTA:
@@ -63,6 +68,13 @@ public class MenuUI {
                 break;
         }
 
+    }
+
+    private void salvarLista(ArrayList<Integer> pLista){
+        if(pLista.isEmpty()){
+           return;
+        }
+        new ListaService(listaDAO).insereListaEmBanco(pLista);
     }
 
 }

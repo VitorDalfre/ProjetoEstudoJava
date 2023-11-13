@@ -36,10 +36,10 @@ public class ListaService {
         Integer maiorNumero = maiorNumeroDaLista(pListaNumeros);
         Integer menorNumero = menorNumeroDaLista(pListaNumeros);
 
-        new ListaDAO().salvaListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
+        listaDAO.insereListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
     }
 
-    private String transformaListaEmString(ArrayList<Integer> lista) {
+    String transformaListaEmString(ArrayList<Integer> lista) {
         StringBuilder listaEmString = new StringBuilder();
 
         for (Integer inteiro : lista) {

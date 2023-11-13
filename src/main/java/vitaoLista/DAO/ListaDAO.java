@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ListaDAO {
 
-    public void salvaListaEmBanco(String listaCompleta, String pares, String impares, Integer maior, Integer menor) {
+    public void insereListaEmBanco(String listaCompleta, String pares, String impares, Integer maior, Integer menor) {
         StringBuilder sql = new StringBuilder();
 
         sql.append("INSERT INTO listas (listacompleta, numerospares, numerosimpares, maiornumero, menornumero) ")
@@ -26,6 +26,26 @@ public class ListaDAO {
             stm.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir tabela em banco!");
+        }
+    }
+
+    public void atualizaListaEmBanco(int idLista, String listaCompleta, String pares, String impares, Integer maior, Integer menor){
+        StringBuilder sql = new StringBuilder();
+        Statement stm;
+
+        sql.append("UPDATE listas SET ")
+                .append(" listacompleta = '").append(listaCompleta)
+                .append("', numerospares = '").append(pares)
+                .append("', numerosimpares = '").append(impares)
+                .append("', maiornumero = ").append(maior)
+                .append(", menornumero = ").append(menor)
+                .append(" WHERE id = ").append(idLista);
+
+        try{
+            stm = ConexaoComBanco.getConexao().createStatement();
+            stm.execute(sql.toString());
+        }catch (SQLException e){
+            System.out.println("Erro ao executar Query!");
         }
     }
 

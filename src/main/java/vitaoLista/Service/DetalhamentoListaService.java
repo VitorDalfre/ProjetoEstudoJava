@@ -2,14 +2,13 @@ package vitaoLista.Service;
 
 import vitaoLista.DAO.ListaDAO;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DetalhamentoService {
+public class DetalhamentoListaService {
 
     private final ListaDAO listaDAO;
 
-    public DetalhamentoService(ListaDAO listaDAO) {
+    public DetalhamentoListaService(ListaDAO listaDAO) {
         this.listaDAO = listaDAO;
     }
 

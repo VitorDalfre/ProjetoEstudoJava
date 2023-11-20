@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 public class AdicionaNumeroListaService {
 
-    private final VerificaListaService verificaListaService;
+    private final VerificaDadosListaService verificaDadosListaService;
     private final AtualizaListaService atualizaListaService;
 
     public AdicionaNumeroListaService(ListaDAO listaDAO) {
-        verificaListaService = new VerificaListaService();
+        verificaDadosListaService = new VerificaDadosListaService();
         atualizaListaService = new AtualizaListaService(listaDAO);
     }
 
     public void adiciona(int idLista, Integer numeroNovo){
         ArrayList<Integer> listaDoBanco = new ArrayList<>(atualizaListaService.transformaListaStringEmArray(idLista));
-        boolean existeNaLista = verificaListaService.existeNaLista(numeroNovo, listaDoBanco);
+        boolean existeNaLista = verificaDadosListaService.existeNaLista(numeroNovo, listaDoBanco);
 
         if(!existeNaLista){
             listaDoBanco.add(numeroNovo);

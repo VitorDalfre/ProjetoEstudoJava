@@ -4,6 +4,7 @@ import vitaoLista.DAO.ListaDAO;
 import vitaoLista.Modelos.DetalhesLista;
 import vitaoLista.Service.AdicionaNumeroListaService;
 import vitaoLista.Service.DetalhamentoListaService;
+import vitaoLista.Service.RemoveNumeroListaService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -12,12 +13,13 @@ public class MenuDetalhamentoUI {
 
     private final ListaDAO listaDAO;
     private final DetalhamentoListaService detalhamentoListaService;
-    private final AdicionaNumeroListaService adicionaNumeroListaService;
+    private final MenuAlteracaoUI menuAlteracaoUI;
+
 
     public MenuDetalhamentoUI() {
         this.listaDAO = new ListaDAO();
+        menuAlteracaoUI = new MenuAlteracaoUI();
         detalhamentoListaService = new DetalhamentoListaService(listaDAO);
-        adicionaNumeroListaService = new AdicionaNumeroListaService(listaDAO);
     }
 
     public void selecionaOpcaoDeDetalhamento() {
@@ -56,11 +58,9 @@ public class MenuDetalhamentoUI {
             case MENOR_NUMERO:
                 System.out.println(detalhamentoListaService.menorNumero(idLista));
                 break;
-            case ADICIONAR_OBSERVACAO:
-                detalhamentoListaService.adicionaObservacaoLista(idLista);
+            case ALTERA_LISTA:
+                menuAlteracaoUI.selecionaOpcaoAlteracao(idLista);
                 break;
-            case ADICIONAR_NUMERO:
-                adicionaNumeroLista(idLista);
             case VOLTAR_MENU_PRINCIPAL:
                 break;
             default:
@@ -78,12 +78,4 @@ public class MenuDetalhamentoUI {
         return opcoes.toString();
     }
 
-    private void adicionaNumeroLista(int idLista){
-        Scanner sc = new Scanner(System.in);
-        int novoNumero;
-
-        System.out.println("Digite qual numero deseja adicionar a está lista: ");
-        novoNumero  = sc.nextInt();
-        adicionaNumeroListaService.adiciona(idLista, novoNumero);
-    }
 }

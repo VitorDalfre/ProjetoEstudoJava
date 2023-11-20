@@ -1,7 +1,7 @@
 package vitaoLista.UI;
 
 import vitaoLista.DAO.ListaDAO;
-import vitaoLista.Modelos.Escolha;
+import vitaoLista.Modelos.EscolhaLista;
 import vitaoLista.Service.ListaService;
 
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ public class MenuUI {
         Scanner sc = new Scanner(System.in);
         System.out.println("Escolha uma opcao: ");
         System.out.println(mostraOpcoesEscolha());
-        Escolha escolhaUser;
+        EscolhaLista escolhaListaUser;
 
         try {
             int escolha = sc.nextInt();
-            escolhaUser = Escolha.getById(escolha);
-            direcionarEscolha(escolhaUser);
+            escolhaListaUser = EscolhaLista.getById(escolha);
+            direcionarEscolha(escolhaListaUser);
         } catch (InputMismatchException | NullPointerException ex) {
             System.out.println("Escolha Invalida! Tente novamente");
             menuDeEscolha();
@@ -35,13 +35,13 @@ public class MenuUI {
     private String mostraOpcoesEscolha() {
         StringBuilder opcoes = new StringBuilder();
 
-        for (Escolha escolha : Escolha.values()) {
-            opcoes.append(escolha.getId()).append(" - ").append(escolha.getDescricao()).append("\n");
+        for (EscolhaLista escolhaLista : EscolhaLista.values()) {
+            opcoes.append(escolhaLista.getId()).append(" - ").append(escolhaLista.getDescricao()).append("\n");
         }
         return opcoes.toString();
     }
 
-    public void direcionarEscolha(Escolha opcaoEscolhida) {
+    public void direcionarEscolha(EscolhaLista opcaoEscolhida) {
 
         ListaService listaService = new ListaService(listaDAO);
         MenuDetalhamentoUI menuDetalhamento = new MenuDetalhamentoUI();
@@ -49,7 +49,7 @@ public class MenuUI {
         switch (opcaoEscolhida) {
             case CRIAR_LISTA:
                 ArrayList<Integer> listaAleatoria = listaService.geraListaDe30NumeroAleatorio();
-                salvarLista(listaAleatoria);
+                listaService.salvarLista(listaAleatoria);
                 menuDeEscolha();
                 break;
             case VER_LISTA:
@@ -73,13 +73,6 @@ public class MenuUI {
                 break;
         }
 
-    }
-
-    private void salvarLista(ArrayList<Integer> pLista){
-        if(pLista.isEmpty()){
-           return;
-        }
-        new ListaService(listaDAO).insereListaEmBanco(pLista);
     }
 
 }

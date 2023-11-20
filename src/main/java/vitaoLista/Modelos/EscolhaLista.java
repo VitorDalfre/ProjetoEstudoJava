@@ -1,5 +1,5 @@
 package vitaoLista.Modelos;
-public enum Escolha {
+public enum EscolhaLista {
 
     CRIAR_LISTA(1,"CRIAR LISTA ALEATORIA"),
     VER_LISTA(2,"VER LISTA"),
@@ -10,7 +10,7 @@ public enum Escolha {
     private final int id;
     private final String descricao;
 
-    Escolha(int id, String descricao) {
+    EscolhaLista(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
@@ -23,10 +23,10 @@ public enum Escolha {
         return descricao;
     }
 
-    public static Escolha getById(int id) {
-        for (Escolha escolha : Escolha.values()) {
-            if (escolha.getId() == id) {
-                return escolha;
+    public static EscolhaLista getById(int id) {
+        for (EscolhaLista escolhaLista : EscolhaLista.values()) {
+            if (escolhaLista.getId() == id) {
+                return escolhaLista;
             }
         }
         return null;

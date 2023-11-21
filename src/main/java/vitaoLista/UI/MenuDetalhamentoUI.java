@@ -2,8 +2,9 @@ package vitaoLista.UI;
 
 import vitaoLista.DAO.ListaDAO;
 import vitaoLista.Modelos.DetalhesLista;
-import vitaoLista.Service.AlteraListaService;
-import vitaoLista.Service.DetalhamentoService;
+import vitaoLista.Service.AdicionaNumeroListaService;
+import vitaoLista.Service.DetalhamentoListaService;
+import vitaoLista.Service.RemoveNumeroListaService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,13 +12,14 @@ import java.util.Scanner;
 public class MenuDetalhamentoUI {
 
     private final ListaDAO listaDAO;
-    private final DetalhamentoService detalhamentoService;
-    private final AlteraListaService alteraListaService;
+    private final DetalhamentoListaService detalhamentoListaService;
+    private final MenuAlteracaoUI menuAlteracaoUI;
+
 
     public MenuDetalhamentoUI() {
         this.listaDAO = new ListaDAO();
-        detalhamentoService = new DetalhamentoService(listaDAO);
-        alteraListaService = new AlteraListaService(listaDAO);
+        menuAlteracaoUI = new MenuAlteracaoUI();
+        detalhamentoListaService = new DetalhamentoListaService(listaDAO);
     }
 
     public void selecionaOpcaoDeDetalhamento() {
@@ -45,22 +47,20 @@ public class MenuDetalhamentoUI {
 
         switch (idDetalhe) {
             case NUMEROS_PARES:
-                System.out.println(detalhamentoService.numerosPares(idLista));
+                System.out.println(detalhamentoListaService.numerosPares(idLista));
                 break;
             case NUMEROS_IMPARES:
-                System.out.println(detalhamentoService.numerosImpares(idLista));
+                System.out.println(detalhamentoListaService.numerosImpares(idLista));
                 break;
             case MAIOR_NUMERO:
-                System.out.println(detalhamentoService.maiorNumero(idLista));
+                System.out.println(detalhamentoListaService.maiorNumero(idLista));
                 break;
             case MENOR_NUMERO:
-                System.out.println(detalhamentoService.menorNumero(idLista));
+                System.out.println(detalhamentoListaService.menorNumero(idLista));
                 break;
-            case ADICIONAR_OBSERVACAO:
-                detalhamentoService.adicionaObservacaoLista(idLista);
+            case ALTERA_LISTA:
+                menuAlteracaoUI.selecionaOpcaoAlteracao(idLista);
                 break;
-            case ADICIONAR_NUMERO:
-                adicionaNumeroLista(idLista);
             case VOLTAR_MENU_PRINCIPAL:
                 break;
             default:
@@ -78,12 +78,4 @@ public class MenuDetalhamentoUI {
         return opcoes.toString();
     }
 
-    private void adicionaNumeroLista(int idLista){
-        Scanner sc = new Scanner(System.in);
-        int novoNumero;
-
-        System.out.println("Digite qual numero deseja adicionar a está lista: ");
-        novoNumero  = sc.nextInt();
-        alteraListaService.adicionaNumeroLista(idLista, novoNumero);
-    }
 }

@@ -39,6 +39,13 @@ public class ListaService {
         listaDAO.insereListaEmBanco(listaEmString, numerosPares, numerosImpares, maiorNumero, menorNumero);
     }
 
+    public void salvarLista(ArrayList<Integer> pLista){
+        if(pLista.isEmpty()){
+            return;
+        }
+        insereListaEmBanco(pLista);
+    }
+
     String transformaListaEmString(ArrayList<Integer> lista) {
         StringBuilder listaEmString = new StringBuilder();
 
